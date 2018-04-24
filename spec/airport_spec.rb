@@ -9,7 +9,7 @@ describe Airport do
   describe '#land' do
     context 'when the weather is stormy' do
       it 'prevents a plane to land at an airport' do
-        expect{ subject.land(plane1, :stormy) }.to raise_error("The weather is too stormy to land!")
+        expect { subject.land(plane1, :stormy) }.to raise_error("The weather is too stormy to land!")
       end
     end
 
@@ -22,14 +22,14 @@ describe Airport do
     context 'when the airport is full' do
       it 'should prevent a plane to land at the airport' do
         airport.hangar = (1..10).map{ |i| Plane.new(i) }
-        expect{ subject.land(plane1, :sunny) }.to raise_error('Sorry, the airport is full already!')
+        expect { subject.land(plane1, :sunny) }.to raise_error('Sorry, the airport is full already!')
       end
     end
 
     context 'when the plane is landed' do
       it 'should raise an error' do
         airport.hangar = [plane1]
-        expect{ subject.land(plane1, :sunny) }.to raise_error('Sorry, the plane is landed already!')
+        expect { subject.land(plane1, :sunny) }.to raise_error('Sorry, the plane is landed already!')
       end
     end
   end
@@ -50,7 +50,7 @@ describe Airport do
     context 'when there are more than one planes in the airport' do
       it 'should prevent one of the planes to take off' do
         airport.hangar = [plane1, plane2]
-        expect{ subject.take_off(plane1, :stormy) }.to raise_error("The weather is too stormy to take off!")
+        expect { subject.take_off(plane1, :stormy) }.to raise_error("The weather is too stormy to take off!")
       end
 
       it 'instructs one of the planes to take off' do
@@ -62,7 +62,7 @@ describe Airport do
     context 'when the plane is flying' do
       it 'raise an error' do
         airport.hangar = [plane1]
-        expect{ subject.take_off(plane2, :sunny) }.to raise_error('Sorry, the plane is flying already!')
+        expect { subject.take_off(plane2, :sunny) }.to raise_error('Sorry, the plane is flying already!')
       end
     end
   end
